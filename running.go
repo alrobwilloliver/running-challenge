@@ -19,6 +19,8 @@ func main() {
 		"Last little push!! Elevation wrong on strava photo. 5.07km and 55m elevation",
 		"Last one from me - 4.3km 11m elevation",
 		"Walking today - 7.1k with an elevation of 43m",
+		"Ran 2.3km today, feeling goood!",
+		"I walked from the sofa to the kitchen.",
 	}
 	for _, result := range sliceRunDetails {
 		fmt.Println(ExtractInfo(result))
@@ -36,11 +38,17 @@ func ExtractInfo(runDetails string) RunResult {
 
 	// elevation
 	regEl := regexp.MustCompile(`\d+m`)
-	elevation := regEl.FindString(runDetails)
+	elevation := "0m"
+	if regEl.MatchString(runDetails) {
+		elevation = regEl.FindString(runDetails)
+	}
 
 	// distance
 	regDist := regexp.MustCompile(`(\d+\.\d+)km|(\d+\.\d+)k`)
-	distance := regDist.FindString(runDetails)
+	distance := "0km"
+	if regDist.MatchString(runDetails) {
+		distance = regDist.FindString(runDetails)
+	}
 
 	return RunResult{
 		activity:  activity,
