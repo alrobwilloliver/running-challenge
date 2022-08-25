@@ -21,6 +21,8 @@ func main() {
 		"Walking today - 7.1k with an elevation of 43m",
 		"Ran 2.3km today, feeling goood!",
 		"I walked from the sofa to the kitchen.",
+		"I ran .5km today, feeling good!",
+		"I ran .5km today, 1m uphill - feeling good!",
 	}
 	for _, result := range sliceRunDetails {
 		fmt.Println(ExtractInfo(result))
@@ -44,7 +46,7 @@ func ExtractInfo(runDetails string) RunResult {
 	}
 
 	// distance
-	regDist := regexp.MustCompile(`(\d+\.\d+)km|(\d+\.\d+)k`)
+	regDist := regexp.MustCompile(`(\d?\.\d+)km|(\d?\.\d+)k`)
 	distance := "0km"
 	if regDist.MatchString(runDetails) {
 		distance = regDist.FindString(runDetails)
